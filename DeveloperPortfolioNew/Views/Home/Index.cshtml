@@ -1,8 +1,58 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@* Razor View for the Developer Portfolio Home Page.
+    Assumes a standard ASP.NET Core MVC or Razor Pages project structure 
+    and the use of Bootstrap for styling (included in _Layout.cshtml).
+*@
+
+@{
+  ViewData["Title"] = "Home | Evan Malherbe";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container my-5">
+  <header class="text-center mb-5">
+    <h1 class="display-3 fw-bold text-primary">Hello, I'm Evan Malherbe 👋</h1>
+    <p class="lead text-muted">Developer | Problem Solver | Creator</p>
+  </header>
+
+  <div class="row align-items-center">
+
+    <div class="col-lg-4 text-center mb-4 mb-lg-0">
+      <img src="/images/profile1.jpg"
+           alt="Evan Profile Photo"
+           class="img-fluid shadow-lg rounded"
+           style="width: 250px; height: 250px; object-fit: cover;">
+      <p class="mt-3 text-secondary">Connect with me on LinkedIn/GitHub!</p>
+    </div>
+
+    <div class="col-lg-8">
+      <h2 class="mb-3 text-secondary">A Little About Me</h2>
+      <p class="fs-5">
+        Hello! I'm Evan Malherbe, a Full Stack Web Developer. I specialise in building robust applications using 
+        both front-end and back-end technologies. Please explore the rest of my portfolio to view <a href="/home/about">my background</a> and 
+        browse my recent <a href="/home/projects">coding projects</a>.
+      </p>
+      <a href="/home/Contact" class="btn btn-primary btn-lg mt-3">Get In Touch</a>
+    </div>
+  </div>
+
+  <hr class="my-5">
+
+  <section class="text-center">
+    <h2 class="mb-4 text-secondary">My Tech Stack & Expertise</h2>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+
+      <span class="badge bg-success fs-6 p-2">ASP.NET Core</span>
+      <span class="badge bg-success fs-6 p-2">React</span>
+      <span class="badge bg-success fs-6 p-2">Angular</span>
+
+      <span class="badge bg-info fs-6 p-2">C#</span>
+      <span class="badge bg-info fs-6 p-2">JavaScript/TypeScript</span>
+      <span class="badge bg-info fs-6 p-2">Python</span>
+
+      <span class="badge bg-secondary fs-6 p-2">SQL Server</span>
+      <span class="badge bg-secondary fs-6 p-2">Git/GitHub</span>
+      <span class="badge bg-secondary fs-6 p-2">Azure/AWS</span>
+    </div>
+    <p class="mt-4 text-muted">And always exploring more!</p>
+  </section>
+
 </div>
