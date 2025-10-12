@@ -1,6 +1,8 @@
 using DeveloperPortfolioNew.Models;
+using DeveloperPortfolioNew.TransferObjects;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace DeveloperPortfolioNew.Controllers
 {
@@ -8,8 +10,8 @@ namespace DeveloperPortfolioNew.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly IHttpClientFactory _httpClientFactory;
-		private readonly string _apiUrl = "https://localhost:7207/api";
-		private readonly string _getFrameworks = "/";
+		private readonly string _apiUrl = "https://localhost:7113/api";
+		private readonly string _getFrameworks = "/framework";
 
 		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
 		{
@@ -31,11 +33,26 @@ namespace DeveloperPortfolioNew.Controllers
 			{
 				Console.WriteLine(ex.ToString());
 			}
+			// Fail
+			if (response == null || !response.IsSuccessStatusCode) 
+			{
+				ViewData["ErrorMessage"] = "API error. Could not load data.";
+				return View(new List<FrameworkDTO>());
+			}
 
-			List<Framework> frameworks = new List<Framework>();
-
+			// Success
+			List<FrameworkDTO>? frameworks = new List<FrameworkDTO>();
+			try
+			{
+				frameworks = await response.Content.ReadFromJsonAsync <List<FrameworkDTO>>();
+			}
+			catch (Exception)
+			{
+				ViewData["ErrorMessage"] = "Could not load data.";
+			}
 			
-			return View();
+			// Pass list to view
+			return View(frameworks);
 		}
 
 		public IActionResult About()
