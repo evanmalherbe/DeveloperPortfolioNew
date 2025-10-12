@@ -1,5 +1,6 @@
 using DeveloperPortfolioNew.Models;
 using DeveloperPortfolioNew.TransferObjects;
+using DeveloperPortfolioNew.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text.Json;
@@ -10,8 +11,9 @@ namespace DeveloperPortfolioNew.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly IHttpClientFactory _httpClientFactory;
-		private readonly string _apiUrl = "https://localhost:7113/api";
+		private readonly string _apiUrl = "https://localhost:7113/api/home";
 		private readonly string _getFrameworks = "/framework";
+		private readonly string _getAboutData = "/about";
 
 		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
 		{
@@ -55,9 +57,42 @@ namespace DeveloperPortfolioNew.Controllers
 			return View(frameworks);
 		}
 
-		public IActionResult About()
+		public async Task<IActionResult> About()
 		{
-			return View();
+			// Fetch education and work experience content
+			HttpClient client = _httpClientFactory.CreateClient();
+			HttpResponseMessage response = new HttpResponseMessage();
+
+			try
+			{
+				response = await client.GetAsync(_apiUrl + _getAboutData);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+			}
+			// Fail
+			if (response == null || !response.IsSuccessStatusCode) 
+			{
+				ViewData["ErrorMessage"] = "API error. Could not load data.";
+				return View(new List<FrameworkDTO>());
+			}
+
+			// Success
+			List<FrameworkDTO>? frameworks = new List<FrameworkDTO>();
+			try
+			{
+				frameworks = await response.Content.ReadFromJsonAsync <List<FrameworkDTO>>();
+			}
+			catch (Exception)
+			{
+				ViewData["ErrorMessage"] = "Could not load data.";
+			}
+			
+			// Pass list to view
+			return View(frameworks);
+			AboutViewModel model = new AboutViewModel();
+			return View(model);
 		}
 
 		public IActionResult Projects()
