@@ -41,13 +41,13 @@
       <h2 class="fw-bold mb-4 text-secondary"><i class="bi bi-mortarboard-fill me-2"></i>Education</h2>
       @if (Model?.Education == null || Model?.Education.Count == 0)
       {
-        <span class="text-danger">@error != "" ? error : "No data returned from API."</span>
+        <span class="text-danger">@error</span>
       }
       else
       {
-        @foreach(var education in Model.Education.OrderByDescending(i => i.ID))
+        @foreach(var education in Model?.Education)
         {
-           <div class="card mb-3 shadow-sm border-0">
+          <div class="card mb-3 shadow-sm border-1" style="background-color: #ECF9F9">
             <div class="card-body">
               <h5 class="card-title fw-bold">@education.Institution</h5>
               <h6 class="card-subtitle mb-2 text-muted">@education.DegreeCourse</h6>
@@ -87,11 +87,11 @@
 
       @if (Model?.Work == null || Model?.Work.Count == 0)
       {
-        <span class="text-danger">@error != "" ? @error : "No data returned from API."</span>
+        <span class="text-danger">@error</span>
       }
       else
       {
-        @foreach (var work in Model?.Work?.OrderByDescending(i => i.ID))
+        @foreach (var work in Model?.Work)
         {
           <div class="card mb-3 shadow-sm border-0 bg-light">
             <div class="card-body">

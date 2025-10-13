@@ -46,7 +46,7 @@ namespace DeveloperPortfolioNew.Controllers
 			List<FrameworkDTO>? frameworks = new List<FrameworkDTO>();
 			try
 			{
-				frameworks = await response.Content.ReadFromJsonAsync <List<FrameworkDTO>>();
+				frameworks = await response.Content.ReadFromJsonAsync<List<FrameworkDTO>>();
 			}
 			catch (Exception)
 			{
