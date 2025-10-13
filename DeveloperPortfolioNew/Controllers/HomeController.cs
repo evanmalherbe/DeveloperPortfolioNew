@@ -70,29 +70,29 @@ namespace DeveloperPortfolioNew.Controllers
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.ToString());
+				ViewData["ErrorMessage"] = "API error. Could not load data.";
+				return View(new AboutViewModel());
 			}
 			// Fail
 			if (response == null || !response.IsSuccessStatusCode) 
 			{
 				ViewData["ErrorMessage"] = "API error. Could not load data.";
-				return View(new List<FrameworkDTO>());
+				return View(new AboutViewModel());
 			}
 
 			// Success
-			List<FrameworkDTO>? frameworks = new List<FrameworkDTO>();
+			AboutViewModel? aboutData = new AboutViewModel();
 			try
 			{
-				frameworks = await response.Content.ReadFromJsonAsync <List<FrameworkDTO>>();
+				aboutData = await response.Content.ReadFromJsonAsync<AboutViewModel>();
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 				ViewData["ErrorMessage"] = "Could not load data.";
 			}
 			
 			// Pass list to view
-			return View(frameworks);
-			AboutViewModel model = new AboutViewModel();
-			return View(model);
+			return View(aboutData);
 		}
 
 		public IActionResult Projects()

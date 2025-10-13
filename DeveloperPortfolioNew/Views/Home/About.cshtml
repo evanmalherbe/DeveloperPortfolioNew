@@ -1,7 +1,8 @@
-﻿@* @model DeveloperPortfolio.Models.AboutViewModel *@ 
+﻿@model DeveloperPortfolioNew.ViewModels.AboutViewModel
 
 @{
   ViewData["Title"] = "About Evan";
+  string error = ViewData["ErrorMessage"] as string ?? "";
 }
 
 <div class="container py-5">
@@ -38,8 +39,28 @@
 
     <div class="col-md-6 mb-4">
       <h2 class="fw-bold mb-4 text-secondary"><i class="bi bi-mortarboard-fill me-2"></i>Education</h2>
-
-      <div class="card mb-3 shadow-sm border-0">
+      @if (Model?.Education == null || Model?.Education.Count == 0)
+      {
+        <span class="text-danger">@error != "" ? error : "No data returned from API."</span>
+      }
+      else
+      {
+        @foreach(var education in Model.Education.OrderByDescending(i => i.ID))
+        {
+           <div class="card mb-3 shadow-sm border-0">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">@education.Institution</h5>
+              <h6 class="card-subtitle mb-2 text-muted">@education.DegreeCourse</h6>
+              <p class="card-text">@education.YearComplete</p>
+              @if (education?.Link != null)
+              {
+                <a href="@education.Link" class="btn btn-sm btn-outline-primary mt-2"><i class="bi bi-download me-1"></i> Download</a>
+              }
+            </div>
+          </div>
+        };
+      }
+     @* <div class="card mb-3 shadow-sm border-0">
         <div class="card-body">
           <h5 class="card-title fw-bold">HyperionDev</h5>
           <h6 class="card-subtitle mb-2 text-muted">Full Stack Web Developer Bootcamp - 2022</h6>
@@ -54,7 +75,7 @@
           <h6 class="card-subtitle mb-2 text-muted">Degree or Qualification Name - Year</h6>
           <p class="card-text">Relevant details about the qualification.</p>
         </div>
-      </div>
+      </div>*@
 
     </div>
 
@@ -64,25 +85,23 @@
       @* Use a loop if data is coming from the database (Model.WorkExperiences) *@
       @* Assuming a static example for now *@
 
-      <div class="card mb-3 shadow-sm border-0 bg-light">
-        <div class="card-body">
-          <h5 class="card-title fw-bold">Intern Estate Agent</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Pam Golding Properties Westville | Jul 2019 - Oct 2021</h6>
-          <ul class="list-unstyled mt-3">
-            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Sold 10 homes in the Westville area.</li>
-            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Performed all sales activities from lead generation to closing.</li>
-            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Made extensive use of Social Media and Sunday show houses to attract buyers.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card mb-3 shadow-sm border-0">
-        <div class="card-body">
-          <h5 class="card-title fw-bold">Training Manager and Website Copywriter</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Company Name | Dates</h6>
-          <p class="card-text">Briefly list relevant duties or achievements using bullet points.</p>
-        </div>
-      </div>
+      @if (Model?.Work == null || Model?.Work.Count == 0)
+      {
+        <span class="text-danger">@error != "" ? @error : "No data returned from API."</span>
+      }
+      else
+      {
+        @foreach (var work in Model?.Work?.OrderByDescending(i => i.ID))
+        {
+          <div class="card mb-3 shadow-sm border-0 bg-light">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">@work.Position</h5>
+              <h6 class="card-subtitle mb-2 text-muted">@work.Company | @work.DatesOfEmployment</h6>
+              <p class="card-text">@work.Description</p>
+            </div>
+          </div>
+        }
+      }
 
     </div>
   </div>

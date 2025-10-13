@@ -4,7 +4,7 @@ namespace DeveloperPortfolioNew.ViewModels
 {
 	public class AboutViewModel
 	{
-		public Education EducationData { get; set; }
-		public WorkExperience WorkExperienceData { get; set; }
+		public List<Education> Education { get; set; }
+		public List<WorkExperience> Work { get; set; }
 	}
 }
