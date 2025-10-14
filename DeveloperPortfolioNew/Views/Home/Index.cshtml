@@ -1,68 +1,141 @@
 ﻿@* Home page *@
 @model List<DeveloperPortfolioNew.TransferObjects.FrameworkDTO>
 
-  @{
+@{
   ViewData["Title"] = "Home | Evan Malherbe";
   string? error = ViewData["ErrorMessage"] as string;
-
 }
 
-<div class="container my-5">
-  <header class="text-center mb-5">
-    <h1 class="display-3 fw-bold text-primary">Hello, I'm Evan Malherbe 👋</h1>
-    <p class="lead text-muted">Developer | Problem Solver | Creator</p>
+<style>
+  /* Add this for a subtle hover effect on the tech stack */
+  .badge-hover { transition: transform 0.2s ease-in-out; }
+    .badge-hover:hover { transform: translateY(-2px); }
+  :root { --primary-color: #e0f2fe; --secondary-color: #bae6fd; --accent-color: #0ea5e9; --text-color: #0c4a6e; --bg-light: #f8f9fa; --color-primary-accent: #4682B4; /* Steel Blue */ --color-primary-dark: #37648d; /* Darker for hover */ --color-secondary-accent: #238E2F; /*6B8E23;*/ /* Olive Drab/Muted Green */ --color-dark-gray: #333333; /* Dark Text */ --color-light-bg: #F5F5F5; /* Off-White Background */ --color-blue-light: #E8F1F8; /* Lightest blue for card BG */ --color-green-light: #F0F5E8; /* Lightest green for card BG */ }
+  .tech-stack-section { max-width: 1200px; margin: 0 auto; background: white; border-radius: 24px; padding: 60px 40px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); }
+  .section-title { font-size: 2.5rem; font-weight: 700; color: #2d3748; margin-bottom: 1rem; position: relative; display: inline-block; }
+    .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: linear-gradient(90deg, var(--accent-color), #38bdf8); border-radius: 2px; }
+  .section-subtitle { color: #718096; font-size: 1.1rem; margin-bottom: 3rem; }
+  .tech-category { margin-bottom: 2.5rem; }
+  .category-title { font-size: 1.3rem; font-weight: 600; color: #4a5568; margin-bottom: 1.2rem; text-align: left; padding-left: 0.5rem; border-left: 4px solid var(--accent-color); }
+  .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+  .tech-badge { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: var(--text-color); padding: 12px 20px; border-radius: 12px; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; cursor: pointer; border: 1px solid rgba(14, 165, 233, 0.2); box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1); text-align: center; position: relative; overflow: hidden; }
+   .tech-badge::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); transition: left 0.5s ease; }
+   .tech-badge:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(14, 165, 233, 0.25); border-color: var(--accent-color); }
+   .tech-badge:hover::before { left: 100%; }
+  .explore-text { margin-top: 3rem; color: #718096; font-size: 1.05rem; font-style: italic; padding: 1rem; background: var(--bg-light); border-radius: 12px; display: inline-block; }
+
+  @@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .tech-category { animation: fadeInUp 0.6s ease forwards; opacity: 0; }
+  .tech-category:nth-child(1) { animation-delay: 0.1s; }
+  .tech-category:nth-child(2) { animation-delay: 0.2s; }
+  .tech-category:nth-child(3) { animation-delay: 0.3s; }
+  .tech-category:nth-child(4) { animation-delay: 0.4s; }
+
+  @@media (max-width: 768px) {
+    .tech-stack-section { padding: 40px 24px; }
+    .section-title { font-size: 2rem; }
+    .tech-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.8rem; }
+    .tech-badge { padding: 10px 16px; font-size: 0.9rem; }
+  }
+</style>
+
+<div class="container my-4">
+  <header class="text-center mb-2">
+    <h1 class="display-3 fw-bold text-primary-accent">Hello, I'm Evan Malherbe 👋</h1>
+    <p class="lead text-secondary-accent">Developer | Problem Solver | Creator</p>
   </header>
 
   <div class="row align-items-center">
-
     <div class="col-lg-4 text-center mb-4 mb-lg-0">
       <img src="/images/profile1.jpg"
            alt="Evan Profile Photo"
-           class="img-fluid shadow-lg rounded"
-           style="width: 250px; height: 250px; object-fit: cover;">
-      <p class="mt-3 text-secondary">Connect with me on LinkedIn/GitHub!</p>
+           class="img-fluid shadow-sm rounded-circle border border-primary-accent"
+           style="width: 300px; height: 300px; object-fit: cover;">
+      <p class="mt-3 text-muted small">Connect with me on LinkedIn/GitHub!</p>
     </div>
 
     <div class="col-lg-8">
-      <h2 class="mb-3 text-secondary">A Little About Me</h2>
-      <p class="fs-5">
-        Hello! I'm Evan Malherbe, a Full Stack Web Developer. I specialise in building robust applications using 
-        both front-end and back-end technologies. Please explore the rest of my portfolio to view <a href="/home/about">my background</a> and 
-        browse my recent <a href="/home/projects">coding projects</a>.
+      <h2 class="mb-3 text-secondary-accent border-bottom pb-2">A Little About Me</h2>
+      <p class="fs-5 text-dark-gray">
+        Hello! I'm Evan Malherbe, a Full Stack Web Developer. I specialise in building robust applications using
+        both front-end and back-end technologies. Please explore the rest of my portfolio to view <a href="/home/about" class="text-primary-accent fw-bold">my background</a> and
+        browse my recent <a href="/home/projects" class="text-primary-accent fw-bold">coding projects</a>.
       </p>
-      <a href="/home/Contact" class="btn btn-primary btn-lg mt-3">Get In Touch</a>
+      <a href="/home/Contact" class="btn btn-custom-accent btn-lg mt-3 shadow-sm">Get In Touch</a>
     </div>
   </div>
 
-  <hr class="my-5">
+  <hr class="my-5 border-secondary-accent">
+  <section class="tech-stack-section text-center">
+    <h2 class="section-title">My Tech Stack & Expertise</h2>
+    <p class="section-subtitle">Technologies I work with daily</p>
 
-  <section class="text-center">
-    <h2 class="mb-4 text-secondary">My Tech Stack & Expertise</h2>
+    <div class="tech-category">
+      <h3 class="category-title">Frontend</h3>
+      <div class="tech-grid">
+        <div class="tech-badge">HTML</div>
+        <div class="tech-badge">CSS</div>
+        <div class="tech-badge">Javascript</div>
+        <div class="tech-badge">React.JS</div>
+        <div class="tech-badge">JQuery</div>
+        <div class="tech-badge">Bootstrap</div>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3 class="category-title">Backend</h3>
+      <div class="tech-grid">
+        <div class="tech-badge">Node.JS</div>
+        <div class="tech-badge">Express</div>
+        <div class="tech-badge">.NET Core</div>
+        <div class="tech-badge">C#</div>
+        <div class="tech-badge">Rest APIs</div>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3 class="category-title">Database & Cloud</h3>
+      <div class="tech-grid">
+        <div class="tech-badge">MongoDB</div>
+        <div class="tech-badge">Microsoft SQL Server</div>
+        <div class="tech-badge">Entity Framework Core</div>
+        <div class="tech-badge">Azure DevOps</div>
+      </div>
+    </div>
+
+    <div class="tech-category">
+      <h3 class="category-title">Tools & Other</h3>
+      <div class="tech-grid">
+        <div class="tech-badge">Git</div>
+        <div class="tech-badge">Github</div>
+        <div class="tech-badge">JWT</div>
+      </div>
+    </div>
+
+    <div class="explore-text">
+      ✨ And always exploring more!
+    </div>
+  </section>
+  @* <section class="text-center">
+    <h2 class="mb-4 text-secondary-accent">My Tech Stack & Expertise</h2>
     <div class="d-flex flex-wrap justify-content-center gap-3">
       @if (Model != null && Model.Any())
       {
         @foreach (var framework in Model)
         {
-          <span class="badge bg-success fs-6 p-2">@framework.Name</span>
+          <span class="badge bg-green-accent text-white-70 fs-6 p-2 badge-hover shadow-sm">@framework.Name</span>
         }
       }
       else
       {
         <p class="text-danger">No frameworks were returned by the API</p>
       }
-     @*  <span class="badge bg-success fs-6 p-2">ASP.NET Core</span>
-      <span class="badge bg-success fs-6 p-2">React</span>
-      <span class="badge bg-success fs-6 p-2">Angular</span>
-
-      <span class="badge bg-info fs-6 p-2">C#</span>
-      <span class="badge bg-info fs-6 p-2">JavaScript/TypeScript</span>
-      <span class="badge bg-info fs-6 p-2">Python</span>
-
-      <span class="badge bg-secondary fs-6 p-2">SQL Server</span>
-      <span class="badge bg-secondary fs-6 p-2">Git/GitHub</span>
-      <span class="badge bg-secondary fs-6 p-2">Azure/AWS</span> *@
     </div>
     <p class="mt-4 text-muted">And always exploring more!</p>
-  </section>
+  </section> *@
 
 </div>

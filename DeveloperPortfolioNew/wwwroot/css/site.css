@@ -20,3 +20,44 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* --- 1. Muted Color Palette Definition --- */
+
+/* Muted Steel Blue/Teal (Primary Accent) */
+/*:root { --color-primary-accent: #4682B4;*/ /* Steel Blue */ /*--color-primary-dark: #37648d;*/ /* Darker for hover */ /*--color-secondary-accent: #238E2F;*//*6B8E23;*/ /* Olive Drab/Muted Green */ /*--color-dark-gray: #333333;*/ /* Dark Text */ /*--color-light-bg: #F5F5F5;*/ /* Off-White Background */ /*--color-blue-light: #E8F1F8;*/ /* Lightest blue for card BG */ /*--color-green-light: #F0F5E8;*/ /* Lightest green for card BG */ /*}*/
+:root { --primary-color: #e0f2fe; --secondary-color: #bae6fd; --accent-color: #0ea5e9; --text-color: #0c4a6e; --bg-light: #f8f9fa; --color-primary-accent: #4682B4; /* Steel Blue */ --color-primary-dark: #37648d; /* Darker for hover */ --color-secondary-accent: #238E2F; /*6B8E23;*/ /* Olive Drab/Muted Green */ --color-dark-gray: #333333; /* Dark Text */ --color-light-bg: #F5F5F5; /* Off-White Background */ --color-blue-light: #E8F1F8; /* Lightest blue for card BG */ --color-green-light: #F0F5E8; /* Lightest green for card BG */ }
+/* --- 2. Custom Bootstrap Color Classes --- */
+
+/* Text colors */
+.text-primary-accent { color: var(--color-primary-accent) !important; }
+.text-secondary-accent { color: var(--color-secondary-accent) !important; }
+.text-dark-gray { color: var(--color-dark-gray) !important; }
+
+/* Background colors for cards/badges */
+.bg-primary-accent { background-color: var(--color-primary-accent) !important; }
+.bg-green-accent { background-color: var(--color-secondary-accent) !important; }
+.bg-blue-light { background-color: var(--color-blue-light) !important; }
+.bg-green-light { background-color: var(--color-green-light) !important; }
+
+/* --- 3. Custom Button Styling --- */
+
+/* Applies to all CTA buttons */
+.btn-custom-accent { background-color: var(--color-primary-accent); color: white; /* Always white text for contrast */ border: 1px solid var(--color-primary-accent); transition: background-color 0.3s, transform 0.2s; }
+.btn-custom-accent:hover { background-color: var(--color-primary-dark); /* Subtle darker hover */ border-color: var(--color-primary-dark); color: white; transform: translateY(-1px); /* Little lift effect */ }
+
+/* --- 4. Global Appearance Improvements --- */
+
+/* Sets a clean global font (e.g., system-ui or a linked Google Font) */
+body { font-family: 'Inter', 'Roboto', sans-serif; /* Link an actual font here */ background-color: var(--color-light-bg); /* Use the off-white base */ color: var(--color-dark-gray); /* Darker text for readability */ }
+
+/* Ensures all default links use your accent color */
+a { color: var(--color-secondary-accent); }
+a:hover { color: var(--color-primary-dark); }
+
+h2 { color: var(--text-secondary-accent); font-weight:bold; }
+
+/* Increase max width of container element */
+@media (min-width: 1200px) { .container {
+    max-width: 1240px;
+  }
+}
