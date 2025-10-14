@@ -5,40 +5,26 @@
   string error = ViewData["ErrorMessage"] as string ?? "";
 }
 
-<div class="container py-5">
+<div class="container pt-0 pb-2">
 
-  <div class="row mb-5 align-items-center">
+  <div class="row mb-2 align-items-center">
 
     <div class="col-lg-4 text-center mb-4 mb-lg-0">
-      <img src="~/images/profile2-cropped.jpg" class="img-fluid rounded-circle shadow-lg" alt="Evan Malherbe Profile" style="max-height: 300px; width: 300px; object-fit: cover;" />
+      <img src="~/images/profile2-cropped.jpg" class="img-fluid rounded-circle shadow-lg" alt="Evan Malherbe Profile" style="max-height: 400px; width: 400px; object-fit: cover;" />
     </div>
 
     <div class="col-lg-8">
       <h1 class="display-5 fw-bold mb-3 text-primary">About Evan</h1>
-      <p class="lead">
-        Hi there! I'm <strong>Evan Malherbe</strong>, and as a Full Stack Developer, my favorite part of coding is the <strong>'Aha!' moment</strong> I experience when I finally solve a complex bug or logical challenge. Sometimes I get so caught up in the code that hours pass without me even realizing it!
-      </p>
-      <p>
-        My focus is the <strong>Microsoft development stack (C#, .NET, Entity Framework Core)</strong>, but I love building things that actually work, from a sturdy <strong>REST API</strong> that handles data efficiently to a clean, attractive <strong>Razor-based front-end</strong> that's just easy to use.
-      </p>
-      <p>
-        Development, for me, is the best kind of creative puzzle. I relish the difficulty because I know that with persistence, I will always end up delivering something solid and highly usable. It’s just a matter of time.
-      </p>
-      <p>
-        Just like with <strong>CrossFit</strong>, I understand that you don't get strong overnight—it’s all about showing up consistently, being disciplined, and making small, incremental progress. That mindset is what I bring to every line of code.
-      </p>
-      <p class="mt-4">
-        I'm currently looking for a team where I can <strong>contribute immediately</strong> and build some great websites. I can’t wait to grow even more in a positive, collaborative environment.
-      </p>
+      <p>@Html.Raw(Model.AboutText)</p>
     </div>
   </div>
 
-  <hr class="my-5 border-primary border-3">
+  <hr class="my-2 border-primary border-3">
 
   <div class="row">
 
     <div class="col-md-6 mb-4">
-      <h2 class="fw-bold mb-4 text-secondary"><i class="bi bi-mortarboard-fill me-2"></i>Education</h2>
+      <h2 class="fw-bold mb-2 text-secondary"><i class="bi bi-mortarboard-fill me-2"></i>Education</h2>
       @if (Model?.Education == null || Model?.Education.Count == 0)
       {
         <span class="text-danger">@error</span>
@@ -47,7 +33,7 @@
       {
         @foreach(var education in Model?.Education)
         {
-          <div class="card mb-3 shadow-sm border-1" style="background-color: #ECF9F9">
+          <div class="card mb-3 shadow-sm border-1" style="background-color: #80A1BA52">
             <div class="card-body">
               <h5 class="card-title fw-bold">@education.Institution</h5>
               <h6 class="card-subtitle mb-2 text-muted">@education.DegreeCourse</h6>
@@ -80,7 +66,7 @@
     </div>
 
     <div class="col-md-6 mb-4">
-      <h2 class="fw-bold mb-4 text-secondary"><i class="bi bi-briefcase-fill me-2"></i>Work Experience</h2>
+      <h2 class="fw-bold mb-2 text-secondary"><i class="bi bi-briefcase-fill me-2"></i>Work Experience</h2>
 
       @* Use a loop if data is coming from the database (Model.WorkExperiences) *@
       @* Assuming a static example for now *@
@@ -93,7 +79,7 @@
       {
         @foreach (var work in Model?.Work)
         {
-          <div class="card mb-3 shadow-sm border-0 bg-light">
+          <div class="card mb-3 shadow-sm border-0" style="background-color: #D6E8CCB0">
             <div class="card-body">
               <h5 class="card-title fw-bold">@work.Position</h5>
               <h6 class="card-subtitle mb-2 text-muted">@work.Company | @work.DatesOfEmployment</h6>
