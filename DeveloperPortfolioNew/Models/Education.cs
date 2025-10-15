@@ -1,4 +1,4 @@
-﻿namespace DeveloperPortfolioNew.ViewModels
+﻿namespace DeveloperPortfolioNew.Models
 {
 	public class Education
 	{

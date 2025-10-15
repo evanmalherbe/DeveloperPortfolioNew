@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DeveloperPortfolioNew.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace DeveloperPortfolioNew.ViewModels
 {

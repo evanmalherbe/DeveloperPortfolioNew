@@ -1,4 +1,4 @@
-namespace DeveloperPortfolioNew.Models
+namespace DeveloperPortfolioNew.ViewModels
 {
 	public class ErrorViewModel
 	{

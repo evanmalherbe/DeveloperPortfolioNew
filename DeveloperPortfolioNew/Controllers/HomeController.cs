@@ -14,55 +14,7 @@ namespace DeveloperPortfolioNew.Controllers
 		private readonly string _apiUrl = "https://localhost:7113/api/home";
 		private readonly string _getFrameworks = "/framework";
 		private readonly string _getAboutData = "/about";
-		public struct TechIcon
-		{
-				public string Name { get; set; }
-				public string ClassOrPath { get; set; } // This will hold the FA class OR the SVG file path
-				public string IconType { get; set; }    // "FA" or "SVG"
-		}
-
-		public static readonly TechIcon[] TechnologyIcons2 = new TechIcon[]
-		{
-				// Existing Font Awesome Icon
-				new TechIcon { Name = "React.JS", ClassOrPath = "fa-brands fa-react", IconType = "FA" }, 
-    
-				// New SVG Icon (Requires saving the SVG to your project)
-				new TechIcon { Name = "MongoDB", ClassOrPath = "/images/icons/mongodb.svg", IconType = "SVG" }, 
-    
-				// New Dedicated .NET Core Icon (If you find the SVG)
-				new TechIcon { Name = ".NET Core", ClassOrPath = "/images/icons/dotnetcore.svg", IconType = "SVG" },
-		};
-		public static readonly Dictionary<string, string> TechnologyIcons = new Dictionary<string, string>
-		{
-      // Key: Technology Name, Value: Font Awesome Class
-
-      // Front-End Languages & Frameworks
-      { "HTML", "fa-brands fa-html5" },
-      { "CSS", "fa-brands fa-css3-alt" },
-      { "JavaScript", "fa-brands fa-square-js" },
-      { "React.JS", "fa-brands fa-react" },
-      { "Bootstrap", "fa-brands fa-bootstrap" },
-
-      // Back-End/Database/APIs
-      { "Node.JS", "fa-brands fa-node-js" },
-      { "Express", "fa-solid fa-server" },              // Using generic server icon
-      { "MongoDB", "fa-solid fa-database" },            // Using generic database icon
-      { "Rest APIs", "fa-solid fa-code" },              // Using generic code icon
-      { "Microsoft SQL Server", "fa-solid fa-database" },
-      { "JWT (JSON Web Tokens)", "fa-solid fa-key" },   // Using key/security icon
-      { "JQuery", "fa-solid fa-hand-pointer" },         // Using hand-pointer icon
-
-      // C# and .NET Ecosystem
-      { "C#", "fa-solid fa-hashtag" },                  // Using hashtag/sharp symbol
-      { ".NET Framework", "fa-solid fa-server" },
-      { ".NET Core", "fa-solid fa-terminal" },
-      { "Entity Framework Core", "fa-solid fa-database" },
-
-      // Tools and Version Control
-      { "Git", "fa-brands fa-git-alt" },
-      { "GitHub", "fa-brands fa-github" },
-      { "Azure DevOps", "fa-brands fa-microsoft" }      // Using generic Microsoft icon
-		};
+		
 		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
 		{
 			_logger = logger;
@@ -100,11 +52,19 @@ namespace DeveloperPortfolioNew.Controllers
 			{
 				ViewData["ErrorMessage"] = "Could not load data.";
 			}
-
+			List<TechIcon> TechnologyIcons = new List<TechIcon>();
 			
-			
+			foreach(FrameworkDTO iconInfo in frameworks)
+			{
+				TechnologyIcons.Add(new TechIcon() { Name = iconInfo.Name, ClassOrPath = iconInfo.IconClassPath, IconType = iconInfo.IconType});
+			}
+			IndexViewModel indexViewModel = new IndexViewModel()
+			{
+				Frameworks = frameworks,
+				TechnologyIcons = TechnologyIcons,
+			};
 			// Pass list to view
-			return View(frameworks);
+			return View(indexViewModel);
 		}
 
 		public async Task<IActionResult> About()

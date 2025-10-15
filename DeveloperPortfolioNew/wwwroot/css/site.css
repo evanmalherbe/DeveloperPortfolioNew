@@ -61,3 +61,14 @@ h2 { color: var(--text-secondary-accent); font-weight:bold; }
     max-width: 1240px;
   }
 }
+/* --- Styling for the overall badge container --- */
+.tech-badge { display: flex; align-items: center; gap: 8px; background-color: var(--color-green-light); color: var(--color-dark-gray); padding: 8px 12px; border-radius: 6px; font-size: 1rem; font-weight: 500; }
+/*.tech-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; font-size: 0.95rem; font-weight: 500; color: #2c3e50; transition: all 0.2s ease; cursor: default; }*/
+.tech-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: #dee2e6; }
+/* --- Styling for Font Awesome Icons --- */
+.tech-badge i { font-size: 1.2rem; /* Make FA icons slightly larger than text */ color: var(--color-primary-accent); /* Use your accent color for FA icons */ }
+/* --- Styling for Embedded SVG/Image Icons --- */
+.tech-icon-svg { /* Crucial: Set a fixed size so the SVG matches the FA icons */ width: 20px; height: 20px; /* Often SVGs are monochrome; use filter if needed to match color scheme */ /* filter: grayscale(100%); */ }
+
+/*.tech-badge i { font-size: 1.2rem; }
+.tech-badge img { width: 20px; height: 20px; object-fit: contain; }*/
