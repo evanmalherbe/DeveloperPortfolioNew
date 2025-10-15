@@ -12,7 +12,7 @@
         { "HTML", "fa-brands fa-html5" },
         { "CSS", "fa-brands fa-css3-alt" },
         { "JavaScript", "fa-brands fa-square-js" },
-        { "React", "fa-brands fa-react" },
+        { "React.JS", "fa-brands fa-react" },
         { "Bootstrap", "fa-brands fa-bootstrap" },
 
         // Back-End/Database/APIs
@@ -121,7 +121,7 @@
   </div>
  *@
   <h1>Technologies I use.</h1>
-  <p class="subtitle">Over the years, I have worked with a variety of technologies. Here are some of the technologies I have experience with:</p>
+  <p class="subtitle">Over the years, I have worked with a variety of technologies. Here are some that I have experience with:</p>
 
   <div class="tech-grid">
     @if (Model != null && Model.Any())
@@ -130,7 +130,7 @@
       @foreach (var framework in Model)
       {
         <div class="tech-badge">
-          <i class="@TechnologyIcons.Where(i => i.Key == framework.Name).Select(i => i.Value).FirstOrDefault()"></i>
+          <i class="@TechnologyIcons.Where(i => i.Key == framework.Name).Select(i => i.Value).FirstOrDefault() ?? 'fa-solid fa-terminal'"></i>
           <span>@framework.Name</span>
         </div>
       }
