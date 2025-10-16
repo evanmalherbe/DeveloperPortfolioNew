@@ -139,11 +139,46 @@ namespace DeveloperPortfolioNew.Controllers
 			catch (Exception ex)
 			{
 				ViewData["ErrorMessage"] = "Could not load data.";
+				return View(new ProjectsViewModel());
+			}
+
+			if (projectData == null || !projectData.Any())
+			{
+				ViewData["ErrorMessage"] = "Could not load data.";
+				return View(new ProjectsViewModel());
+			}
+
+			// Convert original dto to new one so we can change "technologies" from comma separated strings of technologies into List<string>
+			List<ProjectDTO2> list = new List<ProjectDTO2>();
+
+			foreach(ProjectDTO project in projectData)
+			{
+				// skip over if project is null
+				if (project == null) continue;
+
+				ProjectDTO2 dto = new ProjectDTO2();
+				if (project?.Technologies != null)
+				{
+					List<string> techList = project.Technologies.Split(',').ToList();
+					dto.Technologies = techList;
+				}
+				else
+				{
+					dto.Technologies = new List<string>();
+				}
+				dto.ID = project.ID;
+				dto.GithubLink = project?.GithubLink;
+				dto.LiveLink = project?.LiveLink;
+				dto.ImagePath = project?.ImagePath;
+				dto.Name = project?.Name;
+				dto.Description = project?.Description;
+
+				list.Add(dto);
 			}
 
 			ProjectsViewModel model = new ProjectsViewModel()
 			{
-				Projects = projectData
+				Projects = list
 			};
 			return View(model);
 		}

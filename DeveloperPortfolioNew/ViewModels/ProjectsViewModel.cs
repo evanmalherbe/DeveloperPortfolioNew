@@ -4,6 +4,6 @@ namespace DeveloperPortfolioNew.ViewModels
 {
 	public class ProjectsViewModel
 	{
-		public List<ProjectDTO> Projects { get; set; }
+		public List<ProjectDTO2> Projects { get; set; }
 	}
 }

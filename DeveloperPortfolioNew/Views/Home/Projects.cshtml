@@ -5,7 +5,7 @@
   // Sets the page title
   ViewData["Title"] = "Projects | Evan Malherbe";
   string? error = ViewData["ErrorMessage"] as string;
-  List<ProjectDTO> projects = Model?.Projects ?? new List<ProjectDTO>();
+  List<ProjectDTO2> projects = Model?.Projects ?? new List<ProjectDTO2>();
 }
 
 <div class="container my-5">
@@ -19,9 +19,9 @@
   <div class="row g-4">
     @* g-4 creates a nice gap between grid items *@
 
-    @if (Model != null && projects.Any())
+    @if (projects.Count > 0)
     {
-      @foreach (var project in projects)
+      @foreach (ProjectDTO2 project in projects)
       {
         <div class="col-lg-4 col-md-6">
           @* Project Card: Uses a light background and subtle shadow *@
@@ -43,7 +43,7 @@
               <div class="mb-3">
                 @foreach (var tech in project.Technologies)
                 {
-                  <span class="badge bg-green-accent text-dark-gray me-1 mt-1">@tech</span>
+                  <span class="badge bg-green-accent text-white me-1 mt-1">@tech</span>
                 }
               </div>
 
