@@ -35,12 +35,13 @@ namespace DeveloperPortfolioNew.Controllers
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.ToString());
+				response = null;
 			}
 			// Fail
 			if (response == null || !response.IsSuccessStatusCode)
 			{
 				ViewData["ErrorMessage"] = "API error. Could not load data.";
-				return View(new List<FrameworkDTO>());
+				return View(new IndexViewModel());
 			}
 
 			// Success

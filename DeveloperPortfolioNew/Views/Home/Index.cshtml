@@ -5,8 +5,8 @@
 @{
   ViewData["Title"] = "Home | Evan Malherbe";
   string? error = ViewData["ErrorMessage"] as string;
-  List<FrameworkDTO> frameworks = Model.Frameworks;
-  List<TechIcon> techIcons = Model.TechnologyIcons;
+  List<FrameworkDTO> frameworks = Model?.Frameworks ?? new List<FrameworkDTO>();
+  List<TechIcon> techIcons = Model?.TechnologyIcons ?? new List<TechIcon>();
 }
 
 <style>
