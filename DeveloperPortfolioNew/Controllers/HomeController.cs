@@ -131,17 +131,21 @@ namespace DeveloperPortfolioNew.Controllers
 			}
 
 			// Success
-			ProjectsViewModel? projectData = new ProjectsViewModel();
+			List<ProjectDTO>? projectData = new List<ProjectDTO>();
 			try
 			{
-				projectData = await response.Content.ReadFromJsonAsync<ProjectsViewModel>();
+				projectData = await response.Content.ReadFromJsonAsync<List<ProjectDTO>>();
 			}
 			catch (Exception ex)
 			{
 				ViewData["ErrorMessage"] = "Could not load data.";
 			}
 
-			return View(projectData);
+			ProjectsViewModel model = new ProjectsViewModel()
+			{
+				Projects = projectData
+			};
+			return View(model);
 		}
 
 		public IActionResult Contact()
