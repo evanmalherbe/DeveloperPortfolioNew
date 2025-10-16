@@ -14,7 +14,8 @@ namespace DeveloperPortfolioNew.Controllers
 		private readonly string _apiUrl = "https://localhost:7113/api/home";
 		private readonly string _getFrameworks = "/framework";
 		private readonly string _getAboutData = "/about";
-		
+		private readonly string _getProjectData = "/projects";
+
 		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
 		{
 			_logger = logger;
@@ -36,7 +37,7 @@ namespace DeveloperPortfolioNew.Controllers
 				Console.WriteLine(ex.ToString());
 			}
 			// Fail
-			if (response == null || !response.IsSuccessStatusCode) 
+			if (response == null || !response.IsSuccessStatusCode)
 			{
 				ViewData["ErrorMessage"] = "API error. Could not load data.";
 				return View(new List<FrameworkDTO>());
@@ -53,10 +54,10 @@ namespace DeveloperPortfolioNew.Controllers
 				ViewData["ErrorMessage"] = "Could not load data.";
 			}
 			List<TechIcon> TechnologyIcons = new List<TechIcon>();
-			
-			foreach(FrameworkDTO iconInfo in frameworks)
+
+			foreach (FrameworkDTO iconInfo in frameworks)
 			{
-				TechnologyIcons.Add(new TechIcon() { Name = iconInfo.Name, ClassOrPath = iconInfo.IconClassPath, IconType = iconInfo.IconType});
+				TechnologyIcons.Add(new TechIcon() { Name = iconInfo.Name, ClassOrPath = iconInfo.IconClassPath, IconType = iconInfo.IconType });
 			}
 			IndexViewModel indexViewModel = new IndexViewModel()
 			{
@@ -84,7 +85,7 @@ namespace DeveloperPortfolioNew.Controllers
 				return View(new AboutViewModel());
 			}
 			// Fail
-			if (response == null || !response.IsSuccessStatusCode) 
+			if (response == null || !response.IsSuccessStatusCode)
 			{
 				ViewData["ErrorMessage"] = "API error. Could not load data.";
 				return View(new AboutViewModel());
@@ -100,14 +101,46 @@ namespace DeveloperPortfolioNew.Controllers
 			{
 				ViewData["ErrorMessage"] = "Could not load data.";
 			}
-			
+
 			// Pass list to view
 			return View(aboutData);
 		}
 
-		public IActionResult Projects()
+		public async Task<IActionResult> Projects()
 		{
-			return View();
+			// Fetch education and work experience content
+			HttpClient client = _httpClientFactory.CreateClient();
+			HttpResponseMessage response = new HttpResponseMessage();
+
+			try
+			{
+				response = await client.GetAsync(_apiUrl + _getProjectData);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				ViewData["ErrorMessage"] = "API error. Could not load data.";
+				return View(new ProjectsViewModel());
+			}
+			// Fail
+			if (response == null || !response.IsSuccessStatusCode)
+			{
+				ViewData["ErrorMessage"] = "API error. Could not load data.";
+				return View(new ProjectsViewModel());
+			}
+
+			// Success
+			ProjectsViewModel? projectData = new ProjectsViewModel();
+			try
+			{
+				projectData = await response.Content.ReadFromJsonAsync<ProjectsViewModel>();
+			}
+			catch (Exception ex)
+			{
+				ViewData["ErrorMessage"] = "Could not load data.";
+			}
+
+			return View(projectData);
 		}
 
 		public IActionResult Contact()

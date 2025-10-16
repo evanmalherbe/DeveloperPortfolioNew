@@ -1,6 +1,86 @@
-﻿@{
-  ViewData["Title"] = "Projects";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model DeveloperPortfolioNew.ViewModels.ProjectsViewModel
 
-<p>Use this page to detail your site's privacy policy.</p>
+@{
+  // Sets the page title
+  ViewData["Title"] = "Projects | Evan Malherbe";
+  string? error = ViewData["ErrorMessage"] as string;
+}
+
+<div class="container my-5">
+  <header class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-primary-accent">Recent Projects Showcase</h1>
+    <p class="lead text-dark-gray">
+      A selection of my work demonstrating proficiency across the full stack.
+    </p>
+  </header>
+
+  <div class="row g-4">
+    @* g-4 creates a nice gap between grid items *@
+
+    @if (Model != null && Model.Projects.Any())
+    {
+      @foreach (var project in Model.Projects)
+      {
+        <div class="col-lg-4 col-md-6">
+          @* Project Card: Uses a light background and subtle shadow *@
+          <div class="card h-100 shadow-sm border-0 bg-light-bg project-card-hover">
+            <img src=""
+                 class="card-img-top"
+                 alt="@project.Name image"
+                 style="height: 200px; object-fit: cover;">
+
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title fw-bold text-secondary-accent">@project.Name</h5>
+
+              @* Use Html.Raw() for description if it contains formatting *@
+              <p class="card-text text-dark-gray flex-grow-1">
+                @Html.Raw(project.Description)
+              </p>
+
+              @* --- Tech Stack Badges (Optional but recommended) --- *@
+              <div class="mb-3">
+                @foreach (var tech in project.Technologies)
+                {
+                  <span class="badge bg-green-accent text-dark-gray me-1 mt-1">@tech</span>
+                }
+              </div>
+
+              @* --- Action Buttons --- *@
+              <div class="mt-auto">
+                @* Pushes buttons to the bottom *@
+                @if (!string.IsNullOrWhiteSpace(project.LiveLink))
+                {
+                  <a href="@project.LiveLink"
+                     class="btn btn-custom-accent btn-sm me-2"
+                     target="_blank">
+                    <i class="bi bi-box-arrow-up-right me-1"></i> Live Demo
+                  </a>
+                }
+                <a href="@project.GithubLink"
+                   class="btn btn-outline-secondary btn-sm"
+                   target="_blank">
+                  <i class="fa-brands fa-github me-1"></i> GitHub Repo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    }
+    else
+    {
+      <div class="col-12 text-center">
+        <p class="text-danger fs-5">@error</p>
+        <p class="text-muted">No projects found. Please check the API connection.</p>
+      </div>
+    }
+  </div>
+</div>
+
+@* Error display area (optional) *@
+@if (!string.IsNullOrWhiteSpace(error))
+{
+  <div class="text-center my-3">
+    <span class="text-danger">@error</span>
+  </div>
+}
