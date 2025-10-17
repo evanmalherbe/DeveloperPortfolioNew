@@ -185,7 +185,8 @@ namespace DeveloperPortfolioNew.Controllers
 
 		public IActionResult Contact()
 		{
-			return View();
+
+			return View(new ContactViewModel());
 		}
 
 

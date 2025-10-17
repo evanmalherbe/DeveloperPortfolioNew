@@ -1,5 +1,5 @@
-﻿@using DeveloperPortfolioNew.TransferObjects
-@* Home page *@
+﻿@* Home page *@
+@using DeveloperPortfolioNew.TransferObjects
 @model DeveloperPortfolioNew.ViewModels.IndexViewModel
 
 @{
@@ -18,7 +18,7 @@
 
   .container { max-width: 1200px; margin: 0 auto; background: white; padding: 60px 40px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
  */
-  .container { background: white; padding: 15px 40px; border-radius: 12px; }
+  .container { padding: 15px 40px; border-radius: 12px; }
   h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
 
   .subtitle { font-size: 1.1rem; color: #666; margin-bottom: 40px; line-height: 1.6; }
@@ -50,21 +50,15 @@
   .astro { color: #ff5d01; }
   .eslint { color: #4b32c3; }
 
-  /* .footer-text { text-align: center; color: #999; font-style: italic; margin-top: 20px; } */
-/*   @@media (max-width: 768px) {
-    .container { padding: 40px 24px; }
-
-    .subtitle { font-size: 1rem; }
-  } */
 </style>
 
-<div class="container my-4">
+<div class="container mt-1 mb-4 ps-2 pe-2">
   <header class="text-center mb-2">
     <h1 class="display-3 fw-bold text-primary-accent">Hello, I'm Evan Malherbe</h1>
     <p class="lead text-secondary-accent">Developer | Problem Solver | Creator</p>
   </header>
 
-  <div class="row align-items-center">
+  <div class="row d-flex align-items-center justify-content-between">
     <div class="col-lg-4 text-center mb-4 mb-lg-0">
       <img src="/images/profile1.jpg"
            alt="Evan Profile Photo"
@@ -84,11 +78,7 @@
     </div>
   </div>
 
-  <hr class="mt-5 mb-3">
-
-  @* <section class="text-center">
-    <h2 class="mb-4 text-secondary">My Tech Stack & Expertise</h2>
-    <div class="d-flex flex-wrap justify-content-center gap-3"> *@
+  <hr class="horiz mt-5 mb-3">
 
   <section class="text-start">
     <h2 class="mb-2 text-secondary-accent">Technologies I use</h2>
@@ -123,26 +113,4 @@
     </div>
     <p class="mt-4 text-muted">And always exploring more!</p>
   </section>
-  @* 
-  <hr class="my-3 border-secondary-accent">
-  
-  <section class="text-center">
-    <h2 class="mb-2 text-secondary-accent">Technologies I use </h2>
-    <h4 class="mb-4 text-dark-gray">Here are some of the technologies I have experience with: </h4>
-    <div class="d-flex flex-wrap justify-content-center gap-3">
-      @if (Model != null && Model.Any())
-      {
-        @foreach (var framework in Model)
-        {
-          <span class="badge bg-green-accent text-white-70 fs-6 p-2 badge-hover shadow-sm">@framework.Name</span>
-        }
-      }
-      else
-      {
-        <p class="text-danger">No frameworks were returned by the API</p>
-      }
-    </div>
-    <p class="mt-4 text-muted">And always exploring more!</p>
-  </section>
- *@
 </div>

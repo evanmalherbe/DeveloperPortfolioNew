@@ -3,22 +3,38 @@
 @{
   ViewData["Title"] = "About Evan";
   string error = ViewData["ErrorMessage"] as string ?? "";
+  string aboutText = Model?.AboutText ?? "";
 }
 
 <div class="container pt-3 pb-5">
-  <div class="row mb-4 align-items-top">
-    <div class="col-lg-4 text-center mb-4 mb-lg-0">
+  <div class="row mb-4 pt-2 align-items-top justify-content-between">
+  
+    <div class="col-lg-8 pt-1">
+      <h1 class="display-5 fw-bold mb-3 text-primary-accent">About Evan</h1>
+      <div class="fs-5 text-dark-gray">
+        @if (aboutText != "")
+        {
+          @Html.Raw(aboutText)
+        }
+        else
+        {
+          <p>
+            Hi there! I'm <strong>Evan Malherbe</strong>, and as a Full Stack Developer, my favourite part of coding is the <strong>'Aha!' moment</strong> that I experience when I finally solve a wicked bug or logical challenge. Sometimes I get so caught up in the code that hours pass without me even realizing it!<br><br>
+            My focus is the <strong>Microsoft development stack (C#, .NET, Entity Framework Core)</strong>, but I love building things that actually work, from a sturdy <strong>REST API</strong> that handles data efficiently to a clean, attractive Razor-based front-end that's just easy to use.<br><br>
+            Development, for me, is the best kind of creative puzzle. I relish the difficulty because I know that if I just persist, I will always end up cracking out something solid and highly usable. It’s just a matter of time.<br><br>
+            Just like with my <strong>Crossfit</strong> hobby, I understand that you don't get strong overnight - it’s all about showing up consistently, being disciplined, and making small, incremental progress. That mindset is what I bring to every line of code.<br><br>
+            I'm currently looking for a team where I can contribute immediately and build some great websites. I can’t wait to grow even more in a positive, collaborative environment.
+          </p>
+        }
+
+      </div>
+    </div>
+    
+    <div class="col-lg-4 text-center pt-4 mb-4 mb-lg-0">
       <img src="~/images/profile2-cropped.jpg"
            class="img-fluid rounded-circle shadow-lg border border-primary-accent"
            alt="Evan Malherbe Profile"
            style="max-height: 300px; width: 300px; object-fit: cover;" />
-    </div>
-
-    <div class="col-lg-8">
-      <h1 class="display-5 fw-bold mb-3 text-primary-accent">About Evan</h1>
-      <div class="fs-5 text-dark-gray">
-        @Html.Raw(Model.AboutText)
-      </div>
     </div>
   </div>
 
