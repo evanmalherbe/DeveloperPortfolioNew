@@ -60,7 +60,7 @@ a:hover { color: var(--color-primary-dark); }
 
 h1 { color: var(--text-secondary-accent); font-weight: bold; }
 h2 { color: var(--text-secondary-accent); font-weight:bold; }
-
+.med-image { border: 1px solid rgb(201, 201, 201); border-radius: 9px; box-shadow: rgb(201, 201, 201) 2px 2px 8px; }
 /* Increase max width of container element */
 @media (min-width: 1200px) { .container {
     max-width: 1240px;
