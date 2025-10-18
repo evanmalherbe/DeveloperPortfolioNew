@@ -51,7 +51,7 @@
       {
         @foreach (var education in Model?.Education)
         {
-          <div class="card mb-3 border-1 border-dark-grey bg-blue-light-lighter">
+          <div class="card mb-3 border-1 border-dark-grey bg-light">
             <div class="card-body">
               <h5 class="card-title fw-bold">@education.Institution</h5>
               <h6 class="card-subtitle mb-2 text-muted">@education.DegreeCourse</h6>
@@ -78,7 +78,7 @@
       {
         @foreach (var work in Model?.Work)
         {
-          <div class="card mb-3 border-1 bg-green-light border-dark-grey">
+          <div class="card mb-3 border-1 bg-light border-dark-grey">
             <div class="card-body">
               <h5 class="card-title fw-bold">@work.Position</h5>
               <h6 class="card-subtitle mb-2 text-muted">@work.Company - @work.DatesOfEmployment</h6>

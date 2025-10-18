@@ -58,7 +58,12 @@ namespace DeveloperPortfolioNew.Controllers
 
 			foreach (FrameworkDTO iconInfo in frameworks)
 			{
-				TechnologyIcons.Add(new TechIcon() { Name = iconInfo.Name, ClassOrPath = iconInfo.IconClassPath, IconType = iconInfo.IconType });
+				TechnologyIcons.Add(new TechIcon() 
+					{ Name = iconInfo.Name, 
+						ClassOrPath = iconInfo.IconClassPath, 
+						IconType = iconInfo.IconType,
+						BackgroundColour = iconInfo.BackgroundColour
+					});
 			}
 			IndexViewModel indexViewModel = new IndexViewModel()
 			{
