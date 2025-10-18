@@ -55,7 +55,7 @@ body {
 body { font-family: 'Inter', 'Roboto', sans-serif; /* Link an actual font here */ background-color: var(--color-light-bg); /* Use the off-white base */ color: var(--color-dark-gray); /* Darker text for readability */ }
 
 /* Ensures all default links use your accent color */
-a { color: var(--color-secondary-accent); }
+a { color: var(--color-primary-accent); }
 a:hover { color: var(--color-primary-dark); }
 
 h1 { color: var(--text-secondary-accent); font-weight: bold; }
