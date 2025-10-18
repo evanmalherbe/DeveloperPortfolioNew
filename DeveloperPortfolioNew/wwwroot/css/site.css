@@ -75,6 +75,6 @@ h2 { color: var(--text-secondary-accent); font-weight:bold; }
 /* --- Styling for Embedded SVG/Image Icons --- */
 .tech-icon-svg { /* Crucial: Set a fixed size so the SVG matches the FA icons */ width: 20px; height: 20px; /* Often SVGs are monochrome; use filter if needed to match color scheme */ /* filter: grayscale(100%); */ }
 .project-card-hover { /* Sets the speed of the transition */ transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
-.project-card-hover:hover { /* Lifts the card up by 5 pixels */ transform: translateY(-5px); /* Makes the shadow bigger and darker */ box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important; }
+.project-card-hover:hover { /* Lifts the card up by 5 pixels */ transform: translateY(-2px); /* Makes the shadow bigger and darker */ box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important; }
 /*.tech-badge i { font-size: 1.2rem; }
 .tech-badge img { width: 20px; height: 20px; object-fit: contain; }*/
