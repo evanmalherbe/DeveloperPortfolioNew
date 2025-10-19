@@ -52,10 +52,10 @@
         @foreach (var education in Model?.Education)
         {
           <div class="card mb-3 border-1 border-dark-grey bg-light">
-            <div class="card-body">
+            <div class="card-body p-2 ps-3">
               <h5 class="card-title fw-bold">@education.Institution</h5>
-              <h6 class="card-subtitle mb-2 text-muted">@education.DegreeCourse</h6>
-              <p class="card-text small text-secondary-accent mb-2">@education.YearComplete</p>
+              <h6 class="card-subtitle mb-1 text-muted">@education.DegreeCourse</h6>
+              <p class="card-text small text-secondary-accent">@education.YearComplete</p>
               @if (education?.Link != null)
               {
                 <a href="@education.Link" class="mt-0 text-primary-accent fw-bold">@education.LinkText</a>
@@ -79,7 +79,7 @@
         @foreach (var work in Model?.Work)
         {
           <div class="card mb-3 border-1 bg-light border-dark-grey">
-            <div class="card-body">
+            <div class="card-body p-2 ps-3">
               <h5 class="card-title fw-bold">@work.Position</h5>
               <h6 class="card-subtitle mb-2 text-muted">@work.Company - @work.DatesOfEmployment</h6>
               <p class="card-text text-dark-gray">@work.Description</p>
