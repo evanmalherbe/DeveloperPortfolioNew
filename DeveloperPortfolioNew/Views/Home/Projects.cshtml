@@ -11,9 +11,8 @@
 <div class="container pt-3 pb-5">
 
   <h1 class="display-5 fw-bold mb-3 text-primary-accent pt-2">Coding Projects</h1>
-  <p class="fs-5 text-dark-gray">
-    Browse through these a few of my recent coding projects to see what I've been up to in my spare time.<br />
-    Check out my <strong>Github</strong> for the rest of my portfolio: <a href="https://github.com/evanmalherbe" target="_blank">https://github.com/evanmalherbe</a>
+  <p class="fs-5 text-dark-gray mb-4">
+    Browse through these a few of my recent coding projects to see what I've been up to in my spare time. Check out my <strong>Github</strong> for the rest of my portfolio: <a href="https://github.com/evanmalherbe" target="_blank">https://github.com/evanmalherbe</a>
   </p>
 
   <div class="row g-4">
@@ -23,16 +22,27 @@
     {
       @foreach (ProjectDTO2 project in projects)
       {
-        <div class="col-lg-6 col-md-6">
+        <div class="col-lg-4 col-md-6">
           @* Project Card: Uses a light background and subtle shadow project-card-hover*@
           <div class="card h-100 bg-light-bg project-card-hover" style="border: 1px solid #999999; border-radius:9px 9px 0px 0px">
-            <img src="@project?.ImagePath"
-                 class="card-img-top pt-2"
-                 alt="@project?.Name image"
-                 style="width: 100%; height:auto; object-fit: contain;" />
+            @if (!string.IsNullOrWhiteSpace(@project?.ImagePath))
+            {
+              <img src="@project?.ImagePath"
+                   class="card-img-top pt-2"
+                   alt="@project?.Name image"
+              style="width: 100%; max-height:200px; object-fit: contain;" />
+            }
+            else
+            {
+              <img src="/images/project-placeholder.jpg"
+                   class="card-img-top pt-2"
+                   alt="Placeholder image - laptop on desk"
+                   style="width: 100%; max-height:200px; object-fit: contain;" />
+            }
+
 
             <div class="card-body d-flex flex-column pb-1" style="background-color:#f8f9fa">
-              <h5 class="card-title fw-bold text-secondary-accent mt-auto">@project?.Name</h5>
+              <h5 class="card-title fw-bold text-secondary-accent">@project?.Name</h5>
 
               @* Use Html.Raw() for description if it contains formatting *@
               <p class="card-text text-dark-gray">
@@ -40,7 +50,7 @@
               </p>
 
               @* --- Tech Stack Badges (Optional but recommended) --- *@
-              <div class="mb-3">
+              <div class="mb-3 mt-auto">
                 @foreach (var tech in project.Technologies)
                 {
                   <span class="badge bg-green-accent text-white me-1 mt-1">@tech</span>
@@ -58,11 +68,14 @@
                     <i class="bi bi-box-arrow-up-right me-1"></i> Live Demo
                   </a>
                 }
-                <a href="@project?.GithubLink"
-                   class="btn btn-outline-secondary btn-sm"
-                   target="_blank">
-                  <i class="fa-brands fa-github me-1"></i> GitHub Repo
-                </a>
+                @if (!string.IsNullOrWhiteSpace(project?.GithubLink))
+                {
+                  <a href="@project?.GithubLink"
+                  class="btn btn-outline-secondary btn-sm"
+                  target="_blank">
+                    <i class="fa-brands fa-github me-1"></i> GitHub Repo
+                  </a>
+                }
               </div>
             </div>
           </div>
