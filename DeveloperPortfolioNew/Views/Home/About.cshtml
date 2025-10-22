@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <hr class="my-4 border-primary-accent">
+  <hr class="my-4 border-light-grey">
 
   <div class="row">
     <div class="col-md-6 mb-4">
@@ -51,7 +51,7 @@
       {
         @foreach (var education in Model?.Education)
         {
-          <div class="card mb-3 border-1 border-dark-grey bg-light">
+          <div class="card mb-3 border-2 border-light-grey bg-light-blue">
             <div class="card-body p-2 ps-3">
               <h5 class="card-title fw-bold">@education.Institution</h5>
               <h6 class="card-subtitle mb-1 text-muted">@education.DegreeCourse</h6>
@@ -78,11 +78,11 @@
       {
         @foreach (var work in Model?.Work)
         {
-          <div class="card mb-3 border-1 bg-light border-dark-grey">
+          <div class="card mb-3 border-2 bg-light-blue border-light-grey">
             <div class="card-body p-2 ps-3">
               <h5 class="card-title fw-bold">@work.Position</h5>
               <h6 class="card-subtitle mb-2 text-muted">@work.Company - @work.DatesOfEmployment</h6>
-              <p class="card-text text-dark-gray">@work.Description</p>
+              <p class="card-text text-light-gray">@work.Description</p>
             </div>
           </div>
         }
