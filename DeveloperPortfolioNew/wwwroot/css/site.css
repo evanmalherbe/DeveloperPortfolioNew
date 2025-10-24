@@ -42,9 +42,15 @@ body {
 /*b5cde1*/
 .bg-green-light { background-color: var(--color-green-light) !important; }
 .bg-light-blue { background-color: #f9fafe !important; }
+.alert-orange-colour { background-color: #fce5c5 !important; }
+.bg-light-blue-counterpart { background-color: #ebeef2 !important; }
+
 /*Borders  */
 .border-dark-grey { border-color: var(--color-dark-gray2) !important; }
 .border-light-grey { border-color: #e2e4e9 !important; }
+
+
+
 /* --- 3. Custom Button Styling --- */
 
 /* Applies to all CTA buttons */

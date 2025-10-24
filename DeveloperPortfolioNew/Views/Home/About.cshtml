@@ -78,10 +78,10 @@
       {
         @foreach (var work in Model?.Work)
         {
-          <div class="card mb-3 border-2 bg-light-blue border-light-grey">
+          <div class="card mb-3 border-2 bg-light-blue-counterpart border-light-grey">
             <div class="card-body p-2 ps-3">
               <h5 class="card-title fw-bold">@work.Position</h5>
-              <h6 class="card-subtitle mb-2 text-muted">@work.Company - @work.DatesOfEmployment</h6>
+              <h6 class="card-subtitle mb-2">@work.Company - @work.DatesOfEmployment</h6>
               <p class="card-text text-light-gray">@work.Description</p>
             </div>
           </div>
