@@ -27,7 +27,7 @@ namespace DeveloperPortfolioNew.Controllers
 		public async Task<IActionResult> Index()
 		{
 			// Fetch list of frameworks
-			HttpClient client = _httpClientFactory.CreateClient();
+			HttpClient client = _httpClientFactory.CreateClient("ApiWithRetries");
 			HttpResponseMessage response = new HttpResponseMessage();
 
 			try
