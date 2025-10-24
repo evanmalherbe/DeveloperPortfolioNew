@@ -12,15 +12,17 @@ namespace DeveloperPortfolioNew.Controllers
 		private readonly ILogger<HomeController> _logger;
 		private readonly IHttpClientFactory _httpClientFactory;
 		//private readonly string _apiUrl = "https://localhost:7113/api/home"; // local url
-		private readonly string _apiUrl = "https://generalapi-7wfz.onrender.com/api/home"; //live url
+		private readonly string _apiUrl;
 		private readonly string _getFrameworks = "/framework";
 		private readonly string _getAboutData = "/about";
 		private readonly string _getProjectData = "/projects";
 
-		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
+		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory, IConfiguration configuration)
 		{
 			_logger = logger;
 			_httpClientFactory = httpClientFactory;
+			_apiUrl = configuration["ApiSettings:BaseUrl"] 
+                      ?? throw new InvalidOperationException("API Base URL not found in configuration.");
 		}
 
 		public async Task<IActionResult> Index()
