@@ -11,7 +11,8 @@ namespace DeveloperPortfolioNew.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly IHttpClientFactory _httpClientFactory;
-		private readonly string _apiUrl = "https://localhost:7113/api/home";
+		//private readonly string _apiUrl = "https://localhost:7113/api/home"; // local url
+		private readonly string _apiUrl = "https://generalapi-7wfz.onrender.com/api/home"; //live url
 		private readonly string _getFrameworks = "/framework";
 		private readonly string _getAboutData = "/about";
 		private readonly string _getProjectData = "/projects";
