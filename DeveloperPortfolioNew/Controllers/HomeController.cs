@@ -21,8 +21,7 @@ namespace DeveloperPortfolioNew.Controllers
 		{
 			_logger = logger;
 			_httpClientFactory = httpClientFactory;
-			string baseUrl = configuration["ApiSettings:BaseUrl"] ?? throw new InvalidOperationException("API Base URL not found.");
-			_apiUrl = baseUrl + "api/home";
+			_apiUrl = configuration["ApiSettings:BaseUrl"] ?? throw new InvalidOperationException("API Base URL not found.");
 		}
 
 		public async Task<IActionResult> Index()
