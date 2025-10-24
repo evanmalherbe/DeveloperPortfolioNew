@@ -11,11 +11,11 @@ namespace DeveloperPortfolioNew.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly IHttpClientFactory _httpClientFactory;
-		//private readonly string _apiUrl = "https://localhost:7113/api/home"; // local url
+		//private readonly string _apiUrl = "https://localhost:7113"; // local url
 		private readonly string _apiUrl;
-		private readonly string _getFrameworks = "/framework";
-		private readonly string _getAboutData = "/about";
-		private readonly string _getProjectData = "/projects";
+		private readonly string _getFrameworks = "/api/home/framework";
+		private readonly string _getAboutData = "/api/home/about";
+		private readonly string _getProjectData = "/api/home/projects";
 
 		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory, IConfiguration configuration)
 		{
