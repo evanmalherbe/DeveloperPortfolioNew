@@ -13,16 +13,16 @@ namespace DeveloperPortfolioNew.Controllers
 		private readonly IHttpClientFactory _httpClientFactory;
 		//private readonly string _apiUrl = "https://localhost:7113"; // local url
 		private readonly string _apiUrl;
-		private readonly string _getFrameworks = "/api/home/framework";
-		private readonly string _getAboutData = "/api/home/about";
-		private readonly string _getProjectData = "/api/home/projects";
+		private readonly string _getFrameworks = "framework";
+		private readonly string _getAboutData = "about";
+		private readonly string _getProjectData = "projects";
 
 		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory, IConfiguration configuration)
 		{
 			_logger = logger;
 			_httpClientFactory = httpClientFactory;
-			_apiUrl = configuration["ApiSettings:BaseUrl"] 
-                      ?? throw new InvalidOperationException("API Base URL not found in configuration.");
+			string baseUrl = configuration["ApiSettings:BaseUrl"] ?? throw new InvalidOperationException("API Base URL not found.");
+			_apiUrl = baseUrl + "api/home";
 		}
 
 		public async Task<IActionResult> Index()
