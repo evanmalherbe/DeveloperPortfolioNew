@@ -361,3 +361,27 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# --------------------
+# 1. Environmental Variable Files
+# --------------------
+.env
+.env.development
+.env.production
+.env.local
+.env.*.local
+
+# For ASP.NET/frontend projects that use appsettings for secrets
+appsettings.development.json
+appsettings.local.json
+
+# Build Outputs (Common)
+/build
+/dist
+/out
+/release
+/tmp
+
+# C# / .NET / Visual Studio
+/bin/
+/obj/
