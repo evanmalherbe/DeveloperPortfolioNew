@@ -16,7 +16,7 @@ This is my full stack developer portfolio app to showcase my coding projects and
 - [Credits](#credits)
 
 ## Description
-This app is a .NET 8 MVC web app with Razor views that uses a .NET 8 web API (both deployed with [Railway](https://railway.com)) to fetch data from a Postgres SQL database (deployed with [Supubase](https://supabase.com)). All the data (such as my coding projects, work experience and education history) is dynamically populated from the db so that it is super easy to update without changing any code or redeploying the app.<br/>
+This app is a .NET 8 MVC web app with Razor views that uses a .NET 8 web API (both deployed with [Railway](https://railway.com)) to fetch data from a Postgres SQL database (deployed with [Supabase](https://supabase.com)). All the data (such as my coding projects, work experience and education history) is dynamically populated from the db so that it is super easy to update without changing any code or redeploying the app.<br/>
 ![Development portfolio homepage](DeveloperPortfolioNew/wwwroot/images/developerportfolio.png)
 
 ## Getting Started
