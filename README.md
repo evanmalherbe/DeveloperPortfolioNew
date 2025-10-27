@@ -20,20 +20,20 @@ This app is a .NET 8 MVC web app with Razor views that uses a .NET 8 web API (bo
 ![Development portfolio homepage](DeveloperPortfolioNew/wwwroot/images/developerportfolio.png)
 
 ## Getting Started
-This project is a .NET Core MVC web application. To run it outside of Visual Studio, you'll need the **.NET Core SDK** installed on your machine (the version that is compatible with this project - 8.0). 
+This project is a .NET Core MVC web application. To run it outside of Visual Studio, you'll need the **.NET 8 SDK** installed on your machine (the version that is compatible with this project - 8.0). 
 
 1. **Get the code (cloning the repository)** - You'll first need to get the code from Github. Follow these steps from your command line interface (CLI), such as Command Prompt, Powershell or Bash:<br/>
-`git clone https://github.com/evanmalherbe/NewCalculator.git`
+`git clone https://github.com/evanmalherbe/DeveloperPortfolioNew.git`
 2. **Navigate to project directory** - Now use the `cd` command to move into the directory that contains the project's `.csproj` file.<br/>
-`cd NewCalc`
+`cd DeveloperPortfolioNew`
 3. **Restore dependencies (optional but recommended):** Run the following command to download any necessary packages and dependencies. This is often done automatically, but this makes sure everything is in place.<br/>
 `dotnet restore`
 4. **Run the application:** Execute the project using the `dotnet run` command. <br/>`dotnet run`
-5. **Access the application:** Once the application starts, the console output will show the urls where the app is listening. Usually, it will be something like `http://localhost:5000` or `http://localhost:5001`. Open your web browser (E.g. Microsoft Edge, Google Chrome etc) and type that address into your browser address bar to use the calculator.
+5. **Access the application:** Once the application starts, the console output will show the urls where the app is listening. Usually, it will be something like `http://localhost:5000` or `http://localhost:5001`. Open your web browser (E.g. Microsoft Edge, Google Chrome etc) and type that address into your browser address bar to view the app.
 
 ## Usage
-Once you open the project in your browser `http://localhost:5000` (or similar), you will see the calculator with it's familiar layout of buttons. Simply use the number keypad on your keyboard or use your mouse to click the buttons on screen. See figure 1 below.<br/>
-![Calculator screenshot 2](NewCalc/NewCalc/wwwroot/images/calculator2.png)
+Once you open the project in your browser `http://localhost:5000` (or similar), you will see the homepage of my developer portfolio. Use the navigation links on the top right of the screen to jump to the page you want to see, such as "About" or "Projects". See figure 1 below.<br/>
+![Developer portfolio - screenshot of home page](DeveloperPortfolioNew/wwwroot/images/developerportfolio2.png)
 
 ## Credits
 This project was created by Evan Malherbe - October 2025 - [GitHub profile](https://github.com/evanmalherbe)
