@@ -47,7 +47,7 @@
 
               @* Tech badges *@
               <div class="mb-3 mt-auto">
-                @foreach (var tech in project.Technologies)
+                @foreach (var tech in project?.Technologies)
                 {
                   <span class="badge bg-green-accent text-white me-1 mt-1">@tech</span>
                 }
