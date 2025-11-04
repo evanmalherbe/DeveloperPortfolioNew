@@ -84,3 +84,4 @@ h2 { color: var(--text-secondary-accent); font-weight:bold; }
 .project-card-hover:hover { /* Lifts the card up by 5 pixels */ transform: translateY(-2px); /* Makes the shadow bigger and darker */ box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important; }
 /*.tech-badge i { font-size: 1.2rem; }
 .tech-badge img { width: 20px; height: 20px; object-fit: contain; }*/
+.badge { color: white; background-color: #238e2f; border-radius: 4px; border: 1px solid var(--color-secondary-accent); padding: 6px 10px; font-size: 0.8rem; font-weight: 500; }
