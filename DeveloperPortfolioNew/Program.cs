@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using Polly;
 using Polly.Extensions.Http;
 
@@ -34,6 +35,26 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Define the static file provider to point only to the 'images' subfolder
+var imageFileProvider = new PhysicalFileProvider(
+	Path.Combine(builder.Environment.WebRootPath, "images")
+	);
+
+// Apply separate options for image caching
+app.UseStaticFiles(new StaticFileOptions
+{
+	FileProvider = imageFileProvider,
+	RequestPath = "/images",
+	OnPrepareResponse = ctx =>
+	{
+		// Cache images for a full 30 days
+		const int durationInSeconds = 60 * 60 * 24 * 30;
+		ctx.Context.Response.Headers.Append("Cacht-Control", $"public, max-age={durationInSeconds}");
+	}
+});
+
+// Use the default static files configuration for everything else (CSS, JS etc)
 app.UseStaticFiles();
 
 app.UseRouting();
