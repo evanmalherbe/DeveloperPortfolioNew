@@ -1,10 +1,22 @@
-﻿namespace DeveloperPortfolioNew.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DeveloperPortfolioNew.ViewModels
 {
 	public class ContactViewModel
 	{
-		public string Name { get; set; } = "Evan Malherbe";
-		public string Email { get; set; } = "evanmalherbe@gmail.com";
-		public string GithubUrl { get; set; } = "https://github.com/evanmalherbe";
-		public string LinkedInUrl { get; set; } = "http://www.linkedin.com/in/evan-malherbe";
+		[Required(ErrorMessage = "Name is required")]
+		[DataType(DataType.Text)]
+		[MaxLength(100)]
+		public string Name { get; set; }
+
+		[Required(ErrorMessage = "Email is required")]
+		[EmailAddress(ErrorMessage = "Invalid email format")]
+		[MaxLength(255)]
+		public string Email { get; set; }
+
+		[Required(ErrorMessage = "Message is required")]
+		[DataType(DataType.Text)]
+		[MaxLength(4000)]
+		public string Message { get; set; }
 	}
 }

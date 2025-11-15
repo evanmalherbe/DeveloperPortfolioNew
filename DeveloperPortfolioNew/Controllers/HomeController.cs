@@ -1,6 +1,7 @@
 using DeveloperPortfolioNew.Models;
 using DeveloperPortfolioNew.TransferObjects;
 using DeveloperPortfolioNew.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text.Json;
@@ -16,6 +17,7 @@ namespace DeveloperPortfolioNew.Controllers
 		private readonly string _getFrameworks = "framework";
 		private readonly string _getAboutData = "about";
 		private readonly string _getProjectData = "projects";
+		private readonly string _postContactData = "contact";
 
 		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory, IConfiguration configuration)
 		{
@@ -192,10 +194,49 @@ namespace DeveloperPortfolioNew.Controllers
 
 		public IActionResult Contact()
 		{
+			return View();
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Contact(ContactViewModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
+
+			// Fetch education and work experience content
+			HttpClient client = _httpClientFactory.CreateClient();
+			var contactPayload = new {
+				name = model.Name,
+				email = model.Email,
+				message = model.Message,
+			};
+			HttpResponseMessage response = new HttpResponseMessage();
+
+			try
+			{
+				response = await client.PostAsJsonAsync(_apiUrl + _postContactData, contactPayload);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				ViewData["ErrorMessage"] = "API error. Could not submit contact info";
+				return View(new ContactViewModel());
+			}
+
+			// Failure
+			if (response == null || !response.IsSuccessStatusCode)
+			{
+				ViewData["ErrorMessage"] = "API error. Could not submit contact info";
+				return View(new ContactViewModel());
+			}
+
+			string apiResponseString = await response.Content.ReadAsStringAsync();
 
 			return View(new ContactViewModel());
 		}
-
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
