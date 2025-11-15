@@ -8,7 +8,7 @@
   <div class="row pt-2 align-items-center justify-content-between">
 
     @* Contact Details *@
-    <div class="col-lg-6 mb-4 mb-lg-0 pt-1">
+    <div class="col-lg-6 mb-4 mb-lg-0 pt-1" id="contactDetailsDiv">
       <h1 class="display-5 fw-bold mb-3 text-primary-accent">Get In Touch</h1>
       <p class="lead text-dark-gray mb-4">
         I'm always open to new opportunities and collaborations. Feel free to reach out!
@@ -22,13 +22,13 @@
           </p>
         </div>
 
-        <div class="d-flex align-items-center mb-3">
+   @*      <div class="d-flex align-items-center mb-3">
           <i class="fa fa-envelope fs-4 me-3 text-secondary-accent"></i>
           <p class="mb-0 fs-5">
             <span class="fw-bold text-dark-gray">Email:</span>
             <a href="mailto:@Model.Email" class="">@Model.Email</a>
           </p>
-        </div>
+        </div> *@
 
         <div class="d-flex align-items-center mb-3">
           <i class="fa-brands fa-github fs-4 me-3 text-secondary-accent"></i>
@@ -47,12 +47,40 @@
         </div>
       </div>
     </div>
+
     @* Image on right of page *@
     <div class="col-lg-4 text-center">
       <img src="https://imagestore-production.up.railway.app/images/business.jpg"
            alt="Laptop, Phone, Notebook"
            class="img-fluid med-image"
            style="max-height: 250px; object-fit: cover;">
+    </div>
+
+    @* Contact form *@
+    <div id="contactFormDiv" class="p-4 mt-4 bg-light rounded shadow-sm col-12 col-lg-6 border">
+      <h2 class="text-secondary-accent">Contact</h2>
+      <form name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+
+        <div class="mb-3">
+          <label for="name" class="form-label">Your Name:</label>
+          <input type="text" class="form-control" id="name" name="name" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Your Email:</label>
+          <input type="email" class="form-control" id="email" name="email" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="message" class="form-label">Message:</label>
+          <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+        </div>
+      </form>
     </div>
 
   </div>

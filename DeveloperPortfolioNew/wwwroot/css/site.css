@@ -24,7 +24,7 @@ body {
 /* --- 1. Muted Color Palette Definition --- */
 
 /* Muted Steel Blue/Teal (Primary Accent) */
-/*:root { --color-primary-accent: #4682B4;*/ /* Steel Blue */ /*--color-primary-dark: #37648d;*/ /* Darker for hover */ /*--color-secondary-accent: #238E2F;*//*6B8E23;*/ /* Olive Drab/Muted Green */ /*--color-dark-gray: #333333;*/ /* Dark Text */ /*--color-light-bg: #F5F5F5;*/ /* Off-White Background */ /*--color-blue-light: #E8F1F8;*/ /* Lightest blue for card BG */ /*--color-green-light: #F0F5E8;*/ /* Lightest green for card BG */ /*}*/
+/*:root { --color-primary-accent: #4682B4;*/ /* Steel Blue */ /*--color-primary-dark: #37648d;*/ /* Darker for hover */ /*--color-secondary-accent: #238E2F;*/ /*6B8E23;*/ /* Olive Drab/Muted Green */ /*--color-dark-gray: #333333;*/ /* Dark Text */ /*--color-light-bg: #F5F5F5;*/ /* Off-White Background */ /*--color-blue-light: #E8F1F8;*/ /* Lightest blue for card BG */ /*--color-green-light: #F0F5E8;*/ /* Lightest green for card BG */ /*}*/
 :root { --primary-color: #e0f2fe; --secondary-color: #bae6fd; --accent-color: #0ea5e9; --text-color: #0c4a6e; --bg-light: #f8f9fa; --color-primary-accent: #4682B4; /* Steel Blue */ --color-primary-dark: #37648d; /* Darker for hover */ --color-secondary-accent: #238E2F; /*6B8E23;*/ /* Olive Drab/Muted Green */ --color-dark-gray: #333333; /* Dark Text */ --color-light-bg: #F5F5F5; /* Off-White Background */ --color-blue-light: #E8F1F8; /* Lightest blue for card BG */ --color-blue-light-lighter: #eaf2f8; --color-green-light: #F0F5E8; /* Lightest green for card BG */ --color-dark-gray2: #999999; }
 /* --- 2. Custom Bootstrap Color Classes --- */
 
