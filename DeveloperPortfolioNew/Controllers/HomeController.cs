@@ -241,25 +241,18 @@ namespace DeveloperPortfolioNew.Controllers
 			// Failure
 			if (response == null || !response.IsSuccessStatusCode)
 			{
-				string responseContent = await response.Content.ReadAsStringAsync();
+				string responseContent = await response?.Content.ReadAsStringAsync() ?? "";
 
-				if (!string.IsNullOrWhiteSpace(responseContent)) 
-				{
-					errorMessage = responseContent;
-					using (JsonDocument doc = JsonDocument.Parse(responseContent))
-          {
-            if (doc.RootElement.TryGetProperty("error", out var errorElement))
-            {
-                errorMessage = errorElement.GetString() ?? responseContent;
-            }
-          }
-				}
-				else
+				if (responseContent == "{}" || string.IsNullOrEmpty(responseContent)) 
 				{
 					// if response content is empty
-					errorMessage = $"Error code: {response.StatusCode} Message: {response?.ReasonPhrase}" ?? errorMessage;
+					errorMessage = response?.ReasonPhrase != null ? $"Error: {response?.ReasonPhrase}" : errorMessage;
 				}
-
+				else
+				{ 
+					errorMessage = responseContent;
+				}
+				
 				ViewData["ErrorMessage"] = errorMessage;
 				return View(new ContactViewModel());
 			}
