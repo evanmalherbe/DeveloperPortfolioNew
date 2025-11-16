@@ -26,6 +26,7 @@ namespace DeveloperPortfolioNew.Controllers
 			_apiUrl = configuration["ApiSettings:BaseUrl"] ?? throw new InvalidOperationException("API Base URL not found.");
 		}
 
+		[HttpGet]
 		public async Task<IActionResult> Index()
 		{
 			// Fetch list of frameworks
@@ -78,6 +79,7 @@ namespace DeveloperPortfolioNew.Controllers
 			return View(indexViewModel);
 		}
 
+		[HttpGet]
 		public async Task<IActionResult> About()
 		{
 			// Fetch education and work experience content
@@ -116,6 +118,7 @@ namespace DeveloperPortfolioNew.Controllers
 			return View(aboutData);
 		}
 
+		[HttpGet]
 		public async Task<IActionResult> Projects()
 		{
 			// Fetch education and work experience content
@@ -208,16 +211,17 @@ namespace DeveloperPortfolioNew.Controllers
 
 			// Fetch education and work experience content
 			HttpClient client = _httpClientFactory.CreateClient();
-			var contactPayload = new {
-				name = model.Name,
-				email = model.Email,
-				message = model.Message,
+			ContactSubmitDTO payload = new ContactSubmitDTO()
+			{
+				Name = model.Name,
+				Email	= model.Email,
+				Message = model.Message
 			};
+	
 			HttpResponseMessage response = new HttpResponseMessage();
-
 			try
 			{
-				response = await client.PostAsJsonAsync(_apiUrl + _postContactData, contactPayload);
+				response = await client.PostAsJsonAsync(_apiUrl + _postContactData, payload);
 			}
 			catch (Exception ex)
 			{
