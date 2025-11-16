@@ -237,13 +237,34 @@ namespace DeveloperPortfolioNew.Controllers
 				return View(new ContactViewModel());
 			}
 
+			string errorMessage = "An unknown API error occurred.";
 			// Failure
 			if (response == null || !response.IsSuccessStatusCode)
 			{
-				ViewData["ErrorMessage"] = "API error. Could not submit contact info";
+				string responseContent = await response.Content.ReadAsStringAsync();
+
+				if (!string.IsNullOrWhiteSpace(responseContent)) 
+				{
+					errorMessage = responseContent;
+					using (JsonDocument doc = JsonDocument.Parse(responseContent))
+          {
+            if (doc.RootElement.TryGetProperty("error", out var errorElement))
+            {
+                errorMessage = errorElement.GetString() ?? responseContent;
+            }
+          }
+				}
+				else
+				{
+					// if response content is empty
+					errorMessage = $"Error code: {response.StatusCode} Message: {response?.ReasonPhrase}" ?? errorMessage;
+				}
+
+				ViewData["ErrorMessage"] = errorMessage;
 				return View(new ContactViewModel());
 			}
 
+			// Success
 			if (response.IsSuccessStatusCode || response.StatusCode == System.Net.HttpStatusCode.SeeOther)
 			{
 			 // redirect to thank you page

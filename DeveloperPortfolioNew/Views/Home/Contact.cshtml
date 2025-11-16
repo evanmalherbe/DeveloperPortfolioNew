@@ -100,6 +100,7 @@
       $("#contactForm").on("submit", function(event)
       {
         let $contactButton = $("#contactButton");
+          // Disable button and add spinner
          $contactButton.prop("disabled", true)
          if ($("#contact-spinner").length === 0)
          {

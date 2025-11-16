@@ -27,17 +27,19 @@ builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
+	app.UseHttpsRedirection();
+}
+else
+{
+	// if app is in production environment
 	app.UseExceptionHandler("/Home/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-
 // Define the static file provider to point only to the 'images' subfolder
-var imageFileProvider = new PhysicalFileProvider(
+PhysicalFileProvider imageFileProvider = new PhysicalFileProvider(
 	Path.Combine(builder.Environment.WebRootPath, "images")
 	);
 
