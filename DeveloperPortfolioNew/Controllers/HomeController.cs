@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace DeveloperPortfolioNew.Controllers
 {
@@ -12,6 +13,7 @@ namespace DeveloperPortfolioNew.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly IHttpClientFactory _httpClientFactory;
+		private readonly IConfiguration _configuration;
 		private readonly string _apiUrl;
 		private readonly string _getFrameworks = "framework";
 		private readonly string _getAboutData = "about";
@@ -22,6 +24,7 @@ namespace DeveloperPortfolioNew.Controllers
 		{
 			_logger = logger;
 			_httpClientFactory = httpClientFactory;
+			_configuration = configuration;
 			_apiUrl = configuration["ApiSettings:BaseUrl"] ?? throw new InvalidOperationException("API Base URL not found.");
 		}
 
@@ -208,6 +211,26 @@ namespace DeveloperPortfolioNew.Controllers
 				return View(model);
 			}
 
+			// Get recaptcha token from hidden field on form
+			string recaptchaResponse = Request.Form["g-recaptcha-response"].ToString();
+
+			if (string.IsNullOrEmpty(recaptchaResponse))
+			{
+				ModelState.AddModelError(string.Empty, "Please complete reCAPTCHA");
+				return View(model);
+			}
+
+			// Check recaptcha token
+			bool isVerified = await VerifyRecaptchaAsync(recaptchaResponse);
+
+			// Failed reCAPTCHA
+			if (!isVerified) 
+			{
+				ModelState.AddModelError(string.Empty, "Failed reCAPTCHA verification. Please try again.");
+				return View(model);
+			}
+
+			// Passed reCAPTCHA --> continue
 			// Fetch education and work experience content
 			HttpClient client = _httpClientFactory.CreateClient();
 			ContactSubmitDTO payload = new ContactSubmitDTO()
@@ -276,6 +299,39 @@ namespace DeveloperPortfolioNew.Controllers
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+
+		private async Task<bool> VerifyRecaptchaAsync(string response)
+		{
+			var secret = _configuration["GoogleReCaptcha:SecretKey"];
+			var client = _httpClientFactory.CreateClient();
+			var url = $"https://www.google.com/recaptcha/api/siteverify?secret={secret}&response={response}";
+			var result = await client.GetAsync(url);
+			result.EnsureSuccessStatusCode();
+			var content = await result.Content.ReadAsStringAsync();
+			var reCaptchaResponse = JsonSerializer.Deserialize<RecaptchVerifyResponse>(content);
+
+			if (!reCaptchaResponse.Success || reCaptchaResponse.Score < 0.5)
+			{
+				return false;
+			}
+
+			return reCaptchaResponse?.Success ?? false;
+		}
+		public class RecaptchVerifyResponse
+		{
+			[JsonPropertyName("success")]
+			public bool Success { get; set; }
+			[JsonPropertyName("score")]
+			public float Score { get; set; }
+			[JsonPropertyName("action")]
+			public string? Action { get; set; }
+			[JsonPropertyName("challenge_ts")]
+			public DateTime Challenge_ts { get; set; }
+			[JsonPropertyName("hostname")]
+			public string? Hostname { get; set; }
+			[JsonPropertyName("errorcodes")]
+			public List<string>? ErrorCodes { get; set; }
 		}
 	}
 }

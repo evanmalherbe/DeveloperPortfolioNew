@@ -81,7 +81,7 @@
           <label for="hp-field">Please ignore this field</label>
           <input type="text" id="hp-field" name="hp-field" tabindex="-1" autocomplete="off" />
         </div>
-
+        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
         <div class="d-grid">
           <button type="submit" class="btn btn-primary btn-lg" id="contactButton">Send Message</button>
         </div>
@@ -92,13 +92,21 @@
 </div>
 
 @section scripts {
-
+  <partial name="_ValidationScriptsPartial" />
+  <script src="https://www.google.com/recaptcha/api.js?render=6Le6eQ4sAAAAAJYoAr5PNCuNh9QQVyXnoC36dZI-"></script>
   <script type="text/javascript">
+    let recaptchaHandled = false;
 
     $(document).ready(async function()
     {
       $("#contactForm").on("submit", function(event)
       {
+        if (recaptchaHandled)
+        {
+          return true;
+        }
+        debugger;
+        event.preventDefault();
         let $contactButton = $("#contactButton");
           // Disable button and add spinner
          $contactButton.prop("disabled", true)
@@ -106,6 +114,25 @@
          {
            $contactButton.append(`<span id="contact-spinner">&nbsp;<i class="fa fa-spin fa-spinner"></i></span>`);
          }
+
+         grecaptcha.ready(function()
+         {
+           grecaptcha.execute("6Le6eQ4sAAAAAJYoAr5PNCuNh9QQVyXnoC36dZI-", {action: "register"})
+           .then(function(token) 
+           {
+             recaptchaHandled = true;
+             $("#g-recaptcha-response").val(token);
+             $("#contactForm").submit();
+           }).catch(function(error) 
+           {
+             console.error("reCAPTCHA failed to execute: ", error);
+             alert("Contact form submission failed due to reCAPTCHA error. Please try again.");
+             $("#contactButton").prop("disabled", false);
+             $("#contact-spinner").remove();
+           });
+         });
+         // Re-enable button
+
       });
     });
   </script>
