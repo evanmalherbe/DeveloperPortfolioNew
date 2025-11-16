@@ -12,7 +12,6 @@ namespace DeveloperPortfolioNew.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly IHttpClientFactory _httpClientFactory;
-		//private readonly string _apiUrl = "https://localhost:7113"; // local url
 		private readonly string _apiUrl;
 		private readonly string _getFrameworks = "framework";
 		private readonly string _getAboutData = "about";
