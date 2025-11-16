@@ -85,3 +85,4 @@ h2 { color: var(--text-secondary-accent); font-weight:bold; }
 /*.tech-badge i { font-size: 1.2rem; }
 .tech-badge img { width: 20px; height: 20px; object-fit: contain; }*/
 .badge { color: white; background-color: #238e2f; border-radius: 4px; border: 1px solid var(--color-secondary-accent); padding: 6px 10px; font-size: 0.8rem; font-weight: 500; }
+.hp-check {position: absolute; left: -9999px;}

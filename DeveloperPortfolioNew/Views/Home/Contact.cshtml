@@ -77,6 +77,11 @@
           <textarea asp-for="Message" class="form-control" id="message" rows="4" required></textarea>
         </div>
 
+        <div class="hp-check">
+          <label for="hp-field">Please ignore this field</label>
+          <input type="text" id="hp-field" name="hp-field" tabindex="-1" autocomplete="off" /> 
+        </div>
+
         <div class="d-grid">
           <button type="submit" class="btn btn-primary btn-lg" id="contactButton">Send Message</button>
         </div>

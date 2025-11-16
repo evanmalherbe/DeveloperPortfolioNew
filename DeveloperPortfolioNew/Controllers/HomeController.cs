@@ -217,11 +217,19 @@ namespace DeveloperPortfolioNew.Controllers
 				Email	= model.Email,
 				Message = model.Message
 			};
+			var formContent = new Dictionary<string, string>()
+			{
+				{"Name", model.Name},
+				{"Email", model.Email},
+				{"Message", model.Message},
+				{"hp-field", "" }
+			};
+			var content = new FormUrlEncodedContent(formContent);	
 	
 			HttpResponseMessage response = new HttpResponseMessage();
 			try
 			{
-				response = await client.PostAsJsonAsync(_apiUrl + _postContactData, payload);
+				response = await client.PostAsync(_apiUrl + _postContactData, content);
 			}
 			catch (Exception ex)
 			{
@@ -237,9 +245,18 @@ namespace DeveloperPortfolioNew.Controllers
 				return View(new ContactViewModel());
 			}
 
-			string apiResponseString = await response.Content.ReadAsStringAsync();
+			if (response.IsSuccessStatusCode || response.StatusCode == System.Net.HttpStatusCode.SeeOther)
+			{
+			 // redirect to thank you page
+				return View("ThankYou");
+			}
 
+			// Fallback - return to contact view
 			return View(new ContactViewModel());
+		}
+		public IActionResult ThankYou()
+		{
+			return View();
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
