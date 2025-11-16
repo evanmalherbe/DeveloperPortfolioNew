@@ -39,7 +39,7 @@ else
 }
 
 // Define the static file provider to point only to the 'images' subfolder
-PhysicalFileProvider imageFileProvider = new PhysicalFileProvider(
+var imageFileProvider = new PhysicalFileProvider(
 	Path.Combine(builder.Environment.WebRootPath, "images")
 	);
 
