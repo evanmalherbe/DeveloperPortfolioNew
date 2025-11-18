@@ -11,7 +11,6 @@ namespace DeveloperPortfolioNew.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
 		private readonly IHttpClientFactory _httpClientFactory;
 		private readonly IConfiguration _configuration;
 		private readonly string _apiUrl;
@@ -20,9 +19,8 @@ namespace DeveloperPortfolioNew.Controllers
 		private readonly string _getProjectData = "projects";
 		private readonly string _postContactData = "contact";
 
-		public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory, IConfiguration configuration)
+		public HomeController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
 		{
-			_logger = logger;
 			_httpClientFactory = httpClientFactory;
 			_configuration = configuration;
 			_apiUrl = configuration["ApiSettings:BaseUrl"] ?? throw new InvalidOperationException("API Base URL not found.");
